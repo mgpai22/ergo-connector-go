@@ -73,7 +73,8 @@ jobs:
 
       - name: Verify module can be imported
         run: |
-          cd /tmp
+          mkdir -p ${{ runner.temp }}/test-import
+          cd ${{ runner.temp }}/test-import
           go mod init test
           go get github.com/mgpai22/ergo-connector-go@${{ github.sha }}
 
