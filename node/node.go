@@ -628,6 +628,30 @@ func (p *NodeProvider) GetExpectedWaitTime(
 	return &waitTime, err
 }
 
+func (p *NodeProvider) GetSpendingProofByBoxId(
+	ctx context.Context,
+	boxID string,
+	height int32,
+) (*SpendingProof, error) {
+	path := fmt.Sprintf("/transactions/spendingProof/%s", boxID)
+	path += "?height=" + strconv.Itoa(int(height))
+
+	var proof SpendingProof
+	err := p.doRequest(ctx, http.MethodGet, path, nil, &proof)
+	return &proof, err
+}
+
+func (p *NodeProvider) GetSpendingProofByUnconfirmedBoxId(
+	ctx context.Context,
+	boxID string,
+) (*SpendingProof, error) {
+	path := fmt.Sprintf("/transactions/unconfirmed/spendingProof/%s", boxID)
+
+	var proof SpendingProof
+	err := p.doRequest(ctx, http.MethodGet, path, nil, &proof)
+	return &proof, err
+}
+
 // Peers Endpoints
 
 func (p *NodeProvider) GetAllPeers(ctx context.Context) ([]Peer, error) {
