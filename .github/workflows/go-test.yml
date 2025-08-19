@@ -23,7 +23,7 @@ jobs:
       ERGO_NODE_URL: ${{ secrets.ERGO_NODE_URL }}
       ERGO_NODE_API_KEY: ${{ secrets.ERGO_NODE_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - uses: actions/setup-go@v5
